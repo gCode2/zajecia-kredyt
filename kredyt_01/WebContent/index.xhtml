@@ -3,27 +3,38 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-	<title>Zadanie 1 - prosty kalkulator kredytowy (test)</title>
-</h:head>
-<h:body>
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
-	<h1>Zadanie 1 - prosty kalkulator kredytowy</h1>
+<ui:composition template="/templates/page-template.xhtml">
 
-	<h:form id="bla">
-  		Kwota: <h:inputText value="#{kredytBB.kwota}" />
-		<br />
-  		Lata: <h:inputText value="#{kredytBB.lat}" />
-		<br />
-		Procent: <h:inputText value="#{kredytBB.procent}" />
-		<br />
-		<!-- <h:messages id="msg" /> -->
-		<h:messages />
-		Rata kredytu: #{kredytBB.result} zl
-		<br />
-		<h:commandButton value="Dodaj" action="#{kredytBB.calc()}"/>
-	</h:form>
+	<ui:define name="pageContent">
+	
+	<p:panel header="Zadanie 3 - szablonowanie PrimeFaces">
+	
+		<h:form id="bla">
+		
+			<h:panelGrid id="grid" columns="3" cellpadding="4">
+			 	<p:outputLabel for="kwota" value="Kwota: "/>
+				<p:inputText id="kwota" value="#{kredytBB.kwota}" required="true" requiredMessage="Nie podano kwoty!"/>
+				<p:message for="kwota"/>
+		
+		  		<p:outputLabel for="lata" value="Lata: "/>
+		  		<p:inputText id="lata" value="#{kredytBB.lat}" required="true" requiredMessage="Nie podano lat!"/>
+		  		<p:message for="lata"/>
+		
+				<p:outputLabel for="procent" value="Procent: "/>
+				<p:inputText id="procent" value="#{kredytBB.procent}" required="true" requiredMessage="Nie podano oprocentowania!"/>
+				<p:message for="procent"/>
+			</h:panelGrid>
+			<p:messages id="msg"/>
+			Rata kredytu: #{kredytBB.result} zl
+			<br />
+			<p:commandButton value="Dodaj" styleClass="ui-button-secondary" action="#{kredytBB.calc()}" update="@form"/>
+		  
+		</h:form>
+	</p:panel>
+	</ui:define>
 
-</h:body>
+</ui:composition>
 </html>
